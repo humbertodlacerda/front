@@ -35,13 +35,28 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
-  axios: {
-    // proxy: true
+  auth: {
+    strategies: {
+      laravelSanctum: {
+        provider: 'laravel/sanctum',
+        url: 'http://localhost:8000',
+        endpoints: {
+          login: {
+            url: '/api/login'
+          }
+        }
+      },
+    }
   },
 
+  axios: {
+    baseURL: 'http://localhost:8000',
+    credentials: true
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     postcss: {
